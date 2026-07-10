@@ -1,0 +1,1 @@
+Replace Apps Script Code.gs with the included Code.gs, save, and redeploy. This version supports lookup by any submitted guest first+last name and individual guest attendance changes.
