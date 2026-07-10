@@ -1153,13 +1153,93 @@ pointer-events:none;
       }
     }
 
+  
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 40px;
+      border: 1px solid rgba(22, 39, 58, .18);
+      background: rgba(255, 250, 242, .96);
+      border-radius: 6px;
+      padding: 9px 10px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--navy);
+      margin: 4px 0;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(255, 250, 242, .98);
+        border-top: 1px solid rgba(22, 39, 58, .10);
+        border-bottom: 1px solid rgba(22, 39, 58, .10);
+        box-shadow: 0 12px 24px rgba(0,0,0,.08);
+        padding: 8px 0;
+        font-size: .72rem;
+        letter-spacing: .14em;
+        text-align: center;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 13px 18px;
+        white-space: normal;
+      }
+
+      .nav-toggle.open span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.open span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+
   </style>
 </head>
 
 <body>
   <nav class="nav">
     <a class="monogram" href="#top">P • K</a>
-    <div class="nav-links">
+    <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNavLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="mobileNavLinks">
       <a href="#engagement">Our Engagement</a>
       <a href="#schedule">Our Wedding Day</a>
       <a href="#info">Guest Information</a>
@@ -1335,5 +1415,29 @@ pointer-events:none;
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileNavLinks = document.getElementById('mobileNavLinks');
+
+    if (navToggle && mobileNavLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = mobileNavLinks.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      });
+
+      mobileNavLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNavLinks.classList.remove('open');
+          navToggle.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Open navigation menu');
+        });
+      });
+    }
+  </script>
+
 </body>
 </html>
