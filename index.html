@@ -1096,6 +1096,63 @@ pointer-events:none;
       .timeline-events { min-height: auto; }
       .gallery img { height: 230px; }
     }
+  
+    @media (max-width: 760px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 12px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 250, 242, .97);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .monogram {
+        font-size: 1.45rem;
+        line-height: 1;
+      }
+
+      .nav-links {
+        width: 100%;
+        display: flex;
+        gap: 8px 14px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: .64rem;
+        letter-spacing: .11em;
+        line-height: 1.35;
+        text-align: center;
+      }
+
+      .nav-links a {
+        display: inline-block;
+        padding: 5px 2px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav {
+        padding: 10px 12px;
+      }
+
+      .nav-links {
+        gap: 6px 10px;
+        font-size: .58rem;
+        letter-spacing: .08em;
+      }
+
+      .monogram {
+        font-size: 1.35rem;
+      }
+    }
+
   </style>
 </head>
 
