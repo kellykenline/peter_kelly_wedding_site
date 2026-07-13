@@ -23,9 +23,17 @@ function doGet(e) {
   const callback = e.parameter.callback || "callback";
 
   if (action === "lookup") {
-    const data = findRsvpByGuest_(e.parameter.firstName || "", e.parameter.lastName || "");
-    const output = JSON.stringify({ result: "success", found: data !== null, data: data });
-    return ContentService.createTextOutput(callback + "(" + output + ");").setMimeType(ContentService.MimeType.JAVASCRIPT);
+    const matches = findRsvpsByGuest_(e.parameter.firstName || "", e.parameter.lastName || "");
+    const output = JSON.stringify({
+      result: "success",
+      found: matches.length > 0,
+      matches: matches,
+      data: matches.length === 1 ? matches[0] : null
+    });
+
+    return ContentService
+      .createTextOutput(callback + "(" + output + ");")
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
 
   return ContentService.createTextOutput("RSVP endpoint is active.");
@@ -106,56 +114,66 @@ function normalize_(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-function findRsvpByGuest_(firstName, lastName) {
+function findRsvpsByGuest_(firstName, lastName) {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = getOrCreateSheet_(ss);
   const values = sheet.getDataRange().getValues();
 
-  if (values.length <= 1) return null;
+  if (values.length <= 1) return [];
 
   const targetFirst = normalize_(firstName);
   const targetLast = normalize_(lastName);
-  let householdId = null;
+  const matchingHouseholds = [];
 
   for (let i = 1; i < values.length; i++) {
-    if (normalize_(values[i][6]) === targetFirst && normalize_(values[i][7]) === targetLast) {
-      householdId = values[i][1];
-      break;
+    if (
+      normalize_(values[i][6]) === targetFirst &&
+      normalize_(values[i][7]) === targetLast
+    ) {
+      const householdId = String(values[i][1] || "");
+      if (householdId && matchingHouseholds.indexOf(householdId) === -1) {
+        matchingHouseholds.push(householdId);
+      }
     }
   }
 
-  if (!householdId) return null;
+  return matchingHouseholds.map(function(householdId) {
+    const rows = [];
 
-  const rows = [];
-  for (let i = 1; i < values.length; i++) {
-    if (String(values[i][1]) === String(householdId)) rows.push(values[i]);
-  }
+    for (let i = 1; i < values.length; i++) {
+      if (String(values[i][1]) === householdId) {
+        rows.push(values[i]);
+      }
+    }
 
-  if (rows.length === 0) return null;
+    if (rows.length === 0) return null;
 
-  const first = rows[0];
-  const guests = rows.map(function(row) {
+    const first = rows[0];
+    const guests = rows.map(function(row) {
+      return {
+        guestNumber: row[5],
+        firstName: row[6],
+        lastName: row[7],
+        status: row[8],
+        type: row[9],
+        meal: row[10],
+        rehearsalDinner: row[11],
+        morningAfterBrunch: row[12],
+        comments: row[13]
+      };
+    });
+
     return {
-      guestNumber: row[5],
-      firstName: row[6],
-      lastName: row[7],
-      status: row[8],
-      type: row[9],
-      meal: row[10],
-      rehearsalDinner: row[11],
-      morningAfterBrunch: row[12],
-      comments: row[13]
+      submittedAt: first[0],
+      householdId: first[1],
+      lookupFirstName: first[2],
+      lookupLastName: first[3],
+      guestCount: guests.length,
+      guests: guests
     };
+  }).filter(function(match) {
+    return match !== null;
   });
-
-  return {
-    submittedAt: first[0],
-    householdId: first[1],
-    lookupFirstName: first[2],
-    lookupLastName: first[3],
-    guestCount: first[4],
-    guests: guests
-  };
 }
 
 function removeExistingRowsByHousehold_(sheet, householdId) {

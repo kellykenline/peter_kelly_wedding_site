@@ -699,7 +699,7 @@
 
 
   <script>
-    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzy1bFZPrv0Nn2fWD2k2cxjA2tSENPgXdR-7YdzhIFMxTY9H3FRaDZx36VMw2VqYZayyg/exec";
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzFbzUYc3X49-hfz5DoeRwyslJ_G3n4G2l4TbGlcmOV78N9WmveAYbqZOOCdT1Yp8Fygw/exec";
     const adultMeals = ["Filet", "Chicken", "Vegetarian"];
     const childMeals = ["Chicken", "Pasta"];
 
@@ -949,7 +949,11 @@
         return;
       }
 
-      if (!response.found) {
+      const matches = Array.isArray(response.matches)
+        ? response.matches
+        : (response.data ? [response.data] : []);
+
+      if (!response.found || matches.length === 0) {
         rsvpStatus.textContent = "";
         decision(
           "We did not find an existing RSVP for that first and last name. You can start a new RSVP now.",
@@ -959,15 +963,65 @@
         return;
       }
 
-      foundRsvpData = response.data;
-      const names = (response.data.guests || []).map(g => `${g.firstName} ${g.lastName}`).join(", ");
+      if (matches.length === 1) {
+        foundRsvpData = matches[0];
+        const names = (foundRsvpData.guests || [])
+          .map(g => `${g.firstName} ${g.lastName}`)
+          .join(", ");
+
+        rsvpStatus.textContent = "";
+        decision(
+          `We found an RSVP that includes <strong>${esc(names || "this group")}</strong>. Is this the correct RSVP?`,
+          `<button class="button" type="button" onclick="useFoundRsvp()">Yes, update this RSVP</button>
+           <button class="button secondary-button" type="button" onclick="startNewRsvp()">Start a new RSVP</button>`
+        );
+        hideFields();
+        return;
+      }
+
+      foundRsvpData = null;
       rsvpStatus.textContent = "";
+
+      const options = matches.map((match, index) => {
+        const names = (match.guests || [])
+          .map(g => `${g.firstName} ${g.lastName}`)
+          .join(", ");
+        const count = (match.guests || []).length;
+        const guestLabel = count === 1 ? "guest" : "guests";
+
+        return `
+          <div style="margin:14px 0;padding:16px;border:1px solid rgba(184,170,152,.46);background:rgba(255,250,242,.72);">
+            <p style="margin:0 0 10px;"><strong>${esc(names || "Unnamed RSVP")}</strong><br>
+            <span style="color:var(--muted);font-size:.92rem;">${count} ${guestLabel}</span></p>
+            <button class="button" type="button" onclick="selectRsvpMatch(${index})">This is my RSVP</button>
+          </div>`;
+      }).join("");
+
+      window.rsvpLookupMatches = matches;
+
       decision(
-        `We found an RSVP that includes <strong>${esc(names || "this group")}</strong>. Is this the correct RSVP?`,
-        `<button class="button" type="button" onclick="useFoundRsvp()">Yes, update this RSVP</button>
+        `We found more than one RSVP matching <strong>${esc(lookupFirstNameInput.value.trim())} ${esc(lookupLastNameInput.value.trim())}</strong>. Please select the correct group.`,
+        `${options}
          <button class="button secondary-button" type="button" onclick="startNewRsvp()">Start a new RSVP</button>`
       );
+
       hideFields();
+    };
+
+
+    window.selectRsvpMatch = function(index) {
+      const matches = window.rsvpLookupMatches || [];
+      const selected = matches[index];
+
+      if (!selected) {
+        rsvpStatus.textContent = "We could not open that RSVP. Please search again.";
+        return;
+      }
+
+      foundRsvpData = selected;
+      rsvpDecision.style.display = "none";
+      rsvpStatus.textContent = "";
+      prefillForm(selected);
     };
 
     function lookupRsvp() {
