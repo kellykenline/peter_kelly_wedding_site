@@ -33,35 +33,61 @@ function doGet(e) {
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.parameter.payload);
+    const data = JSON.parse(e.parameter.payload || "{}");
+    const guests = Array.isArray(data.guests) ? data.guests : [];
+
+    if (guests.length === 0) {
+      throw new Error("No guest records were received.");
+    }
+
+    guests.forEach(function(guest, index) {
+      if (!String(guest.firstName || "").trim() || !String(guest.lastName || "").trim()) {
+        throw new Error("Guest " + (index + 1) + " is missing a first or last name.");
+      }
+    });
+
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     const sheet = getOrCreateSheet_(ss);
     const householdId = data.householdId || Utilities.getUuid();
 
     removeExistingRowsByHousehold_(sheet, householdId);
 
-    data.guests.forEach(function(guest) {
-      sheet.appendRow([
-        data.submittedAt,
+    const rows = guests.map(function(guest, index) {
+      return [
+        data.submittedAt || new Date().toISOString(),
         householdId,
-        data.lookupFirstName,
-        data.lookupLastName,
-        data.guestCount,
-        guest.guestNumber,
-        guest.firstName,
-        guest.lastName,
-        guest.status,
-        guest.type,
-        guest.meal,
-        guest.rehearsalDinner,
-        guest.morningAfterBrunch,
-        guest.comments
-      ]);
+        data.lookupFirstName || "",
+        data.lookupLastName || "",
+        guests.length,
+        guest.guestNumber || (index + 1),
+        guest.firstName || "",
+        guest.lastName || "",
+        guest.status || "Joyfully Accept",
+        guest.type || "",
+        guest.meal || "",
+        guest.rehearsalDinner || "No",
+        guest.morningAfterBrunch || "No",
+        guest.comments || ""
+      ];
     });
 
-    return ContentService.createTextOutput("success");
+    sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, HEADERS.length).setValues(rows);
+    SpreadsheetApp.flush();
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        result: "success",
+        householdId: householdId,
+        guestCount: rows.length
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
-    return ContentService.createTextOutput("error: " + error.message);
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        result: "error",
+        message: error.message
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 

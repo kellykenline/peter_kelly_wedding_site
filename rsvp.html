@@ -699,7 +699,7 @@
 
 
   <script>
-    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyqW8bJVi3kA3vdy192haa6lMOhLxzJ5GQt3GvWSxit2wuxvL0DDEWviJ-Zv_l4G8cQ3Q/exec";
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzy1bFZPrv0Nn2fWD2k2cxjA2tSENPgXdR-7YdzhIFMxTY9H3FRaDZx36VMw2VqYZayyg/exec";
     const adultMeals = ["Filet", "Chicken", "Vegetarian"];
     const childMeals = ["Chicken", "Pasta"];
 
@@ -733,6 +733,29 @@
 
     function showFields() { rsvpFields.style.display = "block"; }
     function hideFields() { rsvpFields.style.display = "none"; }
+
+    function captureCurrentGuests() {
+      const guests = [];
+      const existingCards = guestContainer.querySelectorAll(".guest-card");
+
+      existingCards.forEach((card, index) => {
+        const i = index + 1;
+        const status = document.getElementById(`guestStatus${i}`)?.value || "Joyfully Accept";
+        guests.push({
+          guestNumber: i,
+          firstName: document.getElementById(`guestFirstName${i}`)?.value.trim() || "",
+          lastName: document.getElementById(`guestLastName${i}`)?.value.trim() || "",
+          status,
+          type: document.getElementById(`guestType${i}`)?.value || "Adult",
+          meal: document.getElementById(`meal${i}`)?.value || "",
+          comments: document.getElementById(`comments${i}`)?.value || "",
+          rehearsalDinner: document.getElementById(`rehearsalDinner${i}`)?.checked ? "Yes" : "No",
+          morningAfterBrunch: document.getElementById(`morningAfterBrunch${i}`)?.checked ? "Yes" : "No"
+        });
+      });
+
+      return guests;
+    }
 
     function renderGuests(prefill = []) {
       const count = Number(guestCount.value || 1);
@@ -915,7 +938,7 @@
         householdId: householdIdInput.value || newHouseholdId(),
         lookupFirstName: lookupFirstNameInput.value.trim(),
         lookupLastName: lookupLastNameInput.value.trim(),
-        guestCount: count,
+        guestCount: guests.length,
         guests
       };
     }
@@ -967,7 +990,10 @@
       setTimeout(() => script.remove(), 10000);
     }
 
-    guestCount?.addEventListener("change", () => renderGuests());
+    guestCount?.addEventListener("change", () => {
+      const currentGuests = captureCurrentGuests();
+      renderGuests(currentGuests);
+    });
     renderGuests();
     hideFields();
 
