@@ -630,6 +630,18 @@
       .timeline-events { min-height: auto; }
       .gallery img { height: 230px; }
     }
+  
+    .rsvp-honeypot {
+      position: absolute !important;
+      left: -10000px !important;
+      top: auto !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
   </style>
 </head>
 <body>
@@ -653,12 +665,17 @@
       <form id="rsvpForm" class="rsvp-form">
         <div class="form-row" id="lookupSection">
           <label for="lookupFirstName">Guest First Name</label>
-          <input id="lookupFirstName" type="text" required placeholder="Example: Mary" />
+          <input id="lookupFirstName" type="text" required maxlength="60" autocomplete="given-name" placeholder="Example: Mary" />
 
           <label for="lookupLastName" style="margin-top:18px;">Guest Last Name</label>
-          <input id="lookupLastName" type="text" required placeholder="Example: Smith" />
+          <input id="lookupLastName" type="text" required maxlength="60" autocomplete="family-name" placeholder="Example: Smith" />
 
           <input id="householdId" type="hidden" />
+          <input id="formOpenedAt" type="hidden" />
+          <div class="rsvp-honeypot" aria-hidden="true">
+            <label for="website">Leave this field blank</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
 
           <div class="rsvp-actions">
             <button class="button secondary-button" type="button" id="findRsvpButton">Find or Start RSVP</button>
@@ -688,7 +705,7 @@
       <div id="rsvpThankYou" class="rsvp-status" style="display:none;text-align:center;margin-top:20px;">
         <h2 id="rsvpThankYouHeading"></h2>
         <p id="rsvpThankYouMessage"></p>
-        <p>If your plans change, simply return to this page anytime to update your RSVP before <strong>August 15, 2027</strong>.</p>
+        <p>If your plans change, simply return to this page anytime to update your RSVP before <strong>September 1, 2027</strong>.</p>
         <p style="margin-top:28px;">
           <a class="button" href="index.html">← Return to the Wedding Website</a>
         </p>
@@ -699,13 +716,15 @@
 
 
   <script>
-    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzFbzUYc3X49-hfz5DoeRwyslJ_G3n4G2l4TbGlcmOV78N9WmveAYbqZOOCdT1Yp8Fygw/exec";
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzM8bFPQ3sAyQjKPqExUkCjkbrumLEFNdnsTS7s5WMZQMfHSo4T1lWlhUsh3yo3RO-pbg/exec";
     const adultMeals = ["Filet", "Chicken", "Vegetarian"];
     const childMeals = ["Chicken", "Pasta"];
 
     const lookupFirstNameInput = document.getElementById("lookupFirstName");
     const lookupLastNameInput = document.getElementById("lookupLastName");
     const householdIdInput = document.getElementById("householdId");
+    const formOpenedAtInput = document.getElementById("formOpenedAt");
+    const honeypotInput = document.getElementById("website");
     const guestCount = document.getElementById("guestCount");
     const guestContainer = document.getElementById("guestContainer");
     const rsvpForm = document.getElementById("rsvpForm");
@@ -717,6 +736,8 @@
 
     let existingRsvpFound = false;
     let foundRsvpData = null;
+
+    if (formOpenedAtInput) formOpenedAtInput.value = String(Date.now());
 
     function esc(value) {
       return String(value || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -776,12 +797,12 @@
           <div class="guest-grid">
             <div class="form-row">
               <label for="guestFirstName${i}">Guest First Name</label>
-              <input id="guestFirstName${i}" type="text" required value="${esc(firstName)}" />
+              <input id="guestFirstName${i}" type="text" required maxlength="60" autocomplete="given-name" value="${esc(firstName)}" />
             </div>
 
             <div class="form-row">
               <label for="guestLastName${i}">Guest Last Name</label>
-              <input id="guestLastName${i}" type="text" required value="${esc(lastName)}" />
+              <input id="guestLastName${i}" type="text" required maxlength="60" autocomplete="family-name" value="${esc(lastName)}" />
             </div>
 
             <div class="form-row">
@@ -807,7 +828,7 @@
 
             <div class="form-row">
               <label for="comments${i}" id="commentsLabel${i}">${commentsLabel}</label>
-              <textarea id="comments${i}" rows="3" placeholder="Optional">${g.comments || ""}</textarea>
+              <textarea id="comments${i}" rows="3" maxlength="1000" placeholder="Optional">${esc(g.comments || "")}</textarea>
             </div>
 
             <div class="form-row" id="additionalEventsRow${i}">
@@ -939,6 +960,8 @@
         lookupFirstName: lookupFirstNameInput.value.trim(),
         lookupLastName: lookupLastNameInput.value.trim(),
         guestCount: guests.length,
+        honeypot: honeypotInput?.value || "",
+        formOpenedAt: Number(formOpenedAtInput?.value || Date.now()),
         guests
       };
     }
@@ -1053,12 +1076,96 @@
 
     findButton?.addEventListener("click", lookupRsvp);
 
+
+    function verifySubmission(payload, attempt = 1) {
+      return new Promise((resolve, reject) => {
+        const callbackName = `verifyRsvp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+        const script = document.createElement("script");
+        let finished = false;
+
+        const cleanup = () => {
+          if (finished) return;
+          finished = true;
+          delete window[callbackName];
+          script.remove();
+        };
+
+        window[callbackName] = response => {
+          cleanup();
+
+          if (response && response.result === "success" && response.verified) {
+            resolve(true);
+            return;
+          }
+
+          if (attempt < 6) {
+            setTimeout(() => {
+              verifySubmission(payload, attempt + 1).then(resolve).catch(reject);
+            }, 900);
+          } else {
+            reject(new Error("The RSVP could not be confirmed."));
+          }
+        };
+
+        script.onerror = () => {
+          cleanup();
+          if (attempt < 6) {
+            setTimeout(() => {
+              verifySubmission(payload, attempt + 1).then(resolve).catch(reject);
+            }, 900);
+          } else {
+            reject(new Error("The RSVP confirmation service could not be reached."));
+          }
+        };
+
+        const params = new URLSearchParams({
+          action: "verify",
+          householdId: payload.householdId,
+          submittedAt: payload.submittedAt,
+          guestCount: String(payload.guests.length),
+          callback: callbackName
+        });
+
+        script.src = `${RSVP_ENDPOINT}?${params.toString()}`;
+        document.body.appendChild(script);
+
+        setTimeout(() => {
+          if (!finished) {
+            cleanup();
+            if (attempt < 6) {
+              verifySubmission(payload, attempt + 1).then(resolve).catch(reject);
+            } else {
+              reject(new Error("The RSVP confirmation timed out."));
+            }
+          }
+        }, 5000);
+      });
+    }
+
     rsvpForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
       const payload = collectPayload();
 
+      if (payload.honeypot) {
+        rsvpStatus.textContent = "We could not process this RSVP.";
+        return;
+      }
+
+      if (Date.now() - payload.formOpenedAt < 3000) {
+        rsvpStatus.textContent = "Please take a moment to review your RSVP and try again.";
+        return;
+      }
+
       if (!payload.lookupFirstName || !payload.lookupLastName) {
         rsvpStatus.textContent = "Please enter both a first name and last name.";
+        return;
+      }
+
+      const invalidLength = payload.guests.some(
+        g => g.firstName.length > 60 || g.lastName.length > 60 || g.comments.length > 1000
+      );
+      if (invalidLength) {
+        rsvpStatus.textContent = "One or more RSVP fields are too long.";
         return;
       }
 
@@ -1076,6 +1183,9 @@
           mode: "no-cors",
           body: new URLSearchParams({ payload: JSON.stringify(payload) })
         });
+
+        rsvpStatus.textContent = "Confirming your RSVP...";
+        await verifySubmission(payload);
 
         rsvpForm.style.display = "none";
 
@@ -1105,7 +1215,7 @@
         if (thankYou) thankYou.style.display = "block";
         rsvpStatus.textContent = "";
       } catch (error) {
-        rsvpStatus.textContent = "Something went wrong. Please try again or contact Peter and Kelly.";
+        rsvpStatus.textContent = "We could not confirm that your RSVP was saved. Please try again or contact Peter and Kelly.";
       }
     });
   </script>
