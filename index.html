@@ -1228,6 +1228,821 @@ pointer-events:none;
       }
     }
 
+  
+    .welcome-photo-stack {
+      position: relative;
+      width: min(560px, 100%);
+      height: 440px;
+      margin: 0 auto;
+    }
+
+    .welcome-photo {
+      position: absolute;
+      display: block;
+      object-fit: cover;
+      background: var(--ivory);
+      border: 9px solid var(--ivory);
+      outline: 1px solid rgba(70, 85, 65, .32);
+      box-shadow: 0 18px 38px rgba(0,0,0,.18);
+    }
+
+    .welcome-photo-main {
+      width: 72%;
+      height: 76%;
+      left: 1%;
+      top: 4%;
+      transform: rotate(-3deg);
+      z-index: 1;
+    }
+
+    .welcome-photo-secondary {
+      width: 48%;
+      height: 66%;
+      right: 1%;
+      bottom: 2%;
+      transform: rotate(4deg);
+      z-index: 2;
+    }
+
+    @media (max-width: 760px) {
+      .welcome-photo-stack {
+        width: min(440px, 94vw);
+        height: 350px;
+        margin-top: 20px;
+      }
+
+      .welcome-photo-main {
+        width: 73%;
+        height: 72%;
+      }
+
+      .welcome-photo-secondary {
+        width: 50%;
+        height: 62%;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .welcome-photo-stack {
+        height: 290px;
+      }
+    }
+
+  
+    .welcome-collage-section {
+      align-items: center;
+    }
+
+    .welcome-collage {
+      position: relative;
+      width: min(640px, 100%);
+      height: 500px;
+      margin: 0 auto;
+    }
+
+    .welcome-collage-photo {
+      position: absolute;
+      display: block;
+      object-fit: cover;
+      background: var(--ivory);
+      border: 9px solid var(--ivory);
+      outline: 1px solid rgba(70, 85, 65, .28);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .18);
+    }
+
+    .welcome-collage-hotel {
+      width: 88%;
+      height: 62%;
+      left: 6%;
+      top: 2%;
+      z-index: 1;
+      transform: rotate(-1.5deg);
+    }
+
+    .welcome-collage-kiss {
+      width: 49%;
+      height: 49%;
+      left: 1%;
+      bottom: 1%;
+      z-index: 2;
+      transform: rotate(-4deg);
+    }
+
+    .welcome-collage-couple {
+      width: 45%;
+      height: 57%;
+      right: 1%;
+      bottom: 0;
+      z-index: 3;
+      transform: rotate(3.5deg);
+    }
+
+    @media (max-width: 900px) {
+      .welcome-collage {
+        width: min(620px, 96vw);
+        height: 455px;
+        margin-bottom: 26px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .welcome-collage {
+        height: 350px;
+      }
+
+      .welcome-collage-hotel {
+        width: 92%;
+        height: 57%;
+        left: 4%;
+      }
+
+      .welcome-collage-kiss {
+        width: 52%;
+        height: 47%;
+      }
+
+      .welcome-collage-couple {
+        width: 47%;
+        height: 54%;
+      }
+    }
+
+  
+.welcome-message p{
+  margin:10px 0;
+}
+.welcome-title{
+  margin:8px 0 12px;
+  font-size:2rem;
+  line-height:1.2;
+}
+.welcome-divider{
+  margin:12px 0 18px;
+  font-size:1.3rem;
+  opacity:.7;
+}
+.welcome-signoff{
+  margin-top:24px;
+  font-family:'Great Vibes','Brush Script MT',cursive;
+  font-size:1.8rem;
+}
+
+
+    .welcome-collage {
+      position: relative;
+      width: min(660px, 100%);
+      height: 520px;
+      margin: 0 auto;
+      perspective: 1200px;
+    }
+
+    .welcome-collage::before {
+      content: "";
+      position: absolute;
+      width: 74%;
+      height: 54%;
+      left: 13%;
+      top: 9%;
+      background: rgba(70, 85, 65, .12);
+      filter: blur(18px);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .welcome-collage-photo {
+      position: absolute;
+      display: block;
+      object-fit: cover;
+      background: #fffdf8;
+      border: 11px solid #fffdf8;
+      border-bottom-width: 24px;
+      outline: 1px solid rgba(70, 85, 65, .24);
+      box-shadow:
+        0 22px 42px rgba(0, 0, 0, .18),
+        0 4px 10px rgba(0, 0, 0, .08);
+      transition: transform .25s ease;
+    }
+
+    .welcome-collage-photo:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .welcome-collage-hotel {
+      width: 86%;
+      height: 60%;
+      left: 7%;
+      top: 1%;
+      z-index: 1;
+      transform: rotate(-1.25deg);
+    }
+
+    .welcome-collage-kiss {
+      width: 47%;
+      height: 48%;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+      transform: rotate(-5deg);
+    }
+
+    .welcome-collage-couple {
+      width: 44%;
+      height: 57%;
+      right: 1%;
+      bottom: 0;
+      z-index: 4;
+      transform: rotate(4deg);
+    }
+
+    @media (max-width: 900px) {
+      .welcome-collage {
+        width: min(620px, 96vw);
+        height: 470px;
+        margin-bottom: 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .welcome-collage {
+        height: 355px;
+      }
+
+      .welcome-collage-photo {
+        border-width: 7px;
+        border-bottom-width: 17px;
+      }
+
+      .welcome-collage-hotel {
+        width: 92%;
+        height: 56%;
+        left: 4%;
+      }
+
+      .welcome-collage-kiss {
+        width: 52%;
+        height: 46%;
+      }
+
+      .welcome-collage-couple {
+        width: 47%;
+        height: 54%;
+      }
+    }
+
+  
+    .welcome-collage-photo {
+      background: #fffdf8;
+      border: 12px solid #fffdf8;
+      border-bottom-width: 28px;
+      outline: 1px solid rgba(176, 141, 87, .52);
+      box-shadow:
+        0 0 0 3px rgba(247, 243, 235, .96),
+        0 0 0 4px rgba(176, 141, 87, .28),
+        0 22px 44px rgba(0, 0, 0, .18),
+        0 5px 12px rgba(0, 0, 0, .08);
+    }
+
+    .welcome-collage-photo::after {
+      content: "";
+    }
+
+    .welcome-collage-hotel {
+      border-radius: 2px;
+    }
+
+    .welcome-collage-kiss,
+    .welcome-collage-couple {
+      border-radius: 2px;
+    }
+
+    .welcome-collage::after {
+      content: "❦";
+      position: absolute;
+      left: 50%;
+      bottom: 2px;
+      transform: translateX(-50%);
+      z-index: 6;
+      color: rgba(176, 141, 87, .72);
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      text-shadow: 0 1px 0 #fffdf8;
+      pointer-events: none;
+    }
+
+    @media (max-width: 560px) {
+      .welcome-collage-photo {
+        border-width: 8px;
+        border-bottom-width: 19px;
+        box-shadow:
+          0 0 0 2px rgba(247, 243, 235, .96),
+          0 0 0 3px rgba(176, 141, 87, .25),
+          0 16px 30px rgba(0, 0, 0, .16);
+      }
+    }
+
+  
+.welcome-title{
+    color:#6d7f63 !important;
+}
+
+
+.our-wedding-content{
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+    padding:1.5rem 2rem;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(176,141,87,.22);
+    border-radius:14px;
+    box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+
+.our-wedding-content p{
+    line-height:1.8;
+    margin:0.75rem 0;
+}
+
+.our-wedding-content .details-divider{
+    color:#b08d57;
+    letter-spacing:0.2rem;
+    margin:0.75rem 0;
+}
+
+
+    /* Welcome collage refinement: emphasize Peter and Kelly */
+    .welcome-collage-photo {
+      border: none !important;
+      outline: none !important;
+      background: transparent !important;
+      box-shadow: 0 20px 42px rgba(0,0,0,.22) !important;
+    }
+
+    .welcome-collage-hotel {
+      width: 84% !important;
+      height: 56% !important;
+      left: 8% !important;
+      top: 1% !important;
+      opacity: .88;
+      z-index: 1 !important;
+    }
+
+    .welcome-collage-kiss {
+      width: 54% !important;
+      height: 54% !important;
+      left: -1% !important;
+      bottom: -1% !important;
+      z-index: 4 !important;
+      transform: rotate(-4deg) !important;
+    }
+
+    .welcome-collage-couple {
+      width: 50% !important;
+      height: 64% !important;
+      right: -1% !important;
+      bottom: -2% !important;
+      z-index: 5 !important;
+      transform: rotate(3deg) !important;
+    }
+
+    .welcome-collage::after {
+      display: none !important;
+    }
+
+    @media (max-width: 560px) {
+      .welcome-collage-kiss {
+        width: 56% !important;
+        height: 52% !important;
+      }
+
+      .welcome-collage-couple {
+        width: 52% !important;
+        height: 61% !important;
+      }
+    }
+
+  
+    .wedding-welcome-feature {
+      padding-top: 72px;
+      padding-bottom: 72px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(176,141,87,.09), transparent 34%),
+        linear-gradient(180deg, var(--warm-white), var(--ivory));
+    }
+
+    .wedding-welcome-grid {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      gap: clamp(42px, 6vw, 86px);
+      align-items: center;
+    }
+
+    .wedding-welcome-copy {
+      text-align: left;
+    }
+
+    .wedding-welcome-copy .welcome-message {
+      padding-bottom: 28px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(176,141,87,.28);
+    }
+
+    .wedding-welcome-copy .welcome-title {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .wedding-welcome-copy .welcome-divider {
+      text-align: left;
+      margin: 8px 0 18px;
+    }
+
+    .wedding-day-feature {
+      position: relative;
+      padding: 34px 36px 32px;
+      background: rgba(255,253,248,.88);
+      border: 1px solid rgba(176,141,87,.34);
+      box-shadow: 0 18px 42px rgba(0,0,0,.075);
+    }
+
+    .wedding-day-feature::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(#b08d57, #6d7f63);
+    }
+
+    .wedding-day-eyebrow {
+      color: #6d7f63;
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-size: 2.2rem;
+      margin-bottom: 4px;
+    }
+
+    .wedding-day-date {
+      color: var(--navy);
+      font-size: .78rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .wedding-day-time {
+      color: #b08d57;
+      font-family: Georgia, serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: .95;
+      margin-bottom: 12px;
+    }
+
+    .wedding-day-title {
+      color: var(--navy);
+      font-size: 1.3rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .wedding-day-description {
+      padding-left: 18px;
+      border-left: 2px solid rgba(176,141,87,.38);
+      color: var(--charcoal);
+    }
+
+    .wedding-day-description p {
+      margin: 0 0 12px;
+      line-height: 1.7;
+    }
+
+    .convalidation-aside {
+      max-width: 620px;
+      margin: 28px 0 0 auto;
+      padding: 14px 0 0 20px;
+      border-top: 1px solid rgba(176,141,87,.18);
+      color: #858585;
+      font-size: .78rem;
+      line-height: 1.65;
+    }
+
+    .convalidation-aside h3 {
+      margin: 0 0 7px;
+      color: #8d8d8d;
+      font-size: .7rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .convalidation-aside p {
+      margin: 0;
+      font-size: inherit;
+    }
+
+    .wedding-welcome-copy .welcome-signoff {
+      margin-top: 26px;
+      text-align: right;
+    }
+
+    @media (max-width: 900px) {
+      .wedding-welcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wedding-welcome-copy,
+      .wedding-welcome-copy .welcome-title,
+      .wedding-welcome-copy .welcome-divider {
+        text-align: center;
+      }
+
+      .convalidation-aside {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+
+      .wedding-welcome-copy .welcome-signoff {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wedding-day-feature {
+        padding: 28px 24px 26px;
+      }
+    }
+
+  
+.wedding-day-feature{
+    margin-top:0 !important;
+}
+.wedding-welcome-copy{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+
+.wedding-welcome-copy{
+    justify-content:center !important;
+}
+
+.wedding-day-feature{
+    margin-top:0 !important;
+}
+
+.wedding-day-description p:empty{
+    display:none;
+}
+
+.wedding-welcome-grid{
+    align-items:center !important;
+}
+
+
+    .wedding-story-section {
+      padding-top: 78px;
+      padding-bottom: 78px;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(176,141,87,.09), transparent 30%),
+        radial-gradient(circle at 88% 82%, rgba(109,127,99,.10), transparent 32%),
+        linear-gradient(180deg, var(--warm-white), var(--ivory));
+      overflow: hidden;
+    }
+
+    .wedding-story-layout {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(220px, .82fr) minmax(360px, 1.15fr) minmax(260px, .9fr);
+      gap: clamp(24px, 3.5vw, 48px);
+      align-items: center;
+    }
+
+    .wedding-story-center {
+      position: relative;
+      z-index: 3;
+      padding: clamp(32px, 4vw, 52px);
+      background: rgba(255,253,248,.96);
+      border: 1px solid rgba(176,141,87,.34);
+      box-shadow: 0 24px 56px rgba(0,0,0,.10);
+      text-align: center;
+    }
+
+    .wedding-story-center::before,
+    .wedding-story-center::after {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border-color: rgba(176,141,87,.58);
+      pointer-events: none;
+    }
+
+    .wedding-story-center::before {
+      top: 14px;
+      left: 14px;
+      border-top: 2px solid;
+      border-left: 2px solid;
+    }
+
+    .wedding-story-center::after {
+      right: 14px;
+      bottom: 14px;
+      border-right: 2px solid;
+      border-bottom: 2px solid;
+    }
+
+    .wedding-story-heading {
+      color: #6d7f63;
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-size: clamp(2.7rem, 5vw, 4.3rem);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .wedding-story-date {
+      color: var(--navy);
+      font-size: .78rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .wedding-story-time {
+      color: #b08d57;
+      font-family: Georgia, serif;
+      font-size: clamp(3.7rem, 8vw, 6.4rem);
+      line-height: .9;
+      margin-bottom: 14px;
+    }
+
+    .wedding-story-title {
+      color: var(--navy);
+      font-size: 1.15rem;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .wedding-story-copy {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 22px 0;
+      border-top: 1px solid rgba(176,141,87,.28);
+      border-bottom: 1px solid rgba(176,141,87,.28);
+      color: var(--charcoal);
+    }
+
+    .wedding-story-copy p {
+      margin: 0 0 14px;
+      line-height: 1.75;
+    }
+
+    .wedding-story-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .wedding-story-convalidation {
+      margin: 24px auto 0;
+      max-width: 590px;
+      color: #858585;
+      font-size: .77rem;
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .wedding-story-convalidation h3 {
+      margin: 0 0 7px;
+      color: #929292;
+      font-size: .69rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .wedding-story-convalidation p {
+      margin: 0;
+      font-size: inherit;
+    }
+
+    .wedding-story-photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--ivory);
+      box-shadow: 0 20px 42px rgba(0,0,0,.16);
+    }
+
+    .wedding-story-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .wedding-story-photo-tall {
+      height: 610px;
+      transform: rotate(-2.5deg);
+      z-index: 1;
+    }
+
+    .wedding-story-side-photos {
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .wedding-story-photo-wide {
+      height: 285px;
+      transform: rotate(2.5deg);
+    }
+
+    .wedding-story-photo-walking {
+      height: 360px;
+      width: 82%;
+      justify-self: end;
+      transform: rotate(-2deg);
+    }
+
+    @media (max-width: 1000px) {
+      .wedding-story-layout {
+        grid-template-columns: .8fr 1.2fr;
+      }
+
+      .wedding-story-side-photos {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .wedding-story-photo-tall {
+        height: 520px;
+      }
+
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking {
+        width: 100%;
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wedding-story-section {
+        padding-top: 54px;
+        padding-bottom: 54px;
+      }
+
+      .wedding-story-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .wedding-story-center {
+        order: 1;
+        width: 100%;
+        padding: 34px 24px;
+      }
+
+      .wedding-story-photo-tall {
+        order: 2;
+        width: min(520px, 94%);
+        height: 500px;
+        transform: rotate(-1.5deg);
+      }
+
+      .wedding-story-side-photos {
+        order: 3;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking {
+        width: 100%;
+        height: 240px;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wedding-story-photo-tall {
+        height: 420px;
+      }
+
+      .wedding-story-side-photos {
+        grid-template-columns: 1fr;
+      }
+
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking {
+        height: 250px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1240,9 +2055,10 @@ pointer-events:none;
       <span></span>
     </button>
     <div class="nav-links" id="mobileNavLinks">
-      <a href="#engagement">Our Engagement</a>
+      
       <a href="#schedule">Our Wedding Day</a>
       <a href="#info">Guest Information</a>
+      <a href="#engagement">Our Engagement</a>
       <a href="#rsvp">RSVP</a>
     </div>
   </nav>
@@ -1273,20 +2089,54 @@ pointer-events:none;
     </div>
   </header>
 
-  <section class="section section-light split">
-    <div class="center">
-      <div class="script">Welcome</div>
-      <p>Thank you for being such an important part of our lives. We can’t wait to celebrate our wedding together with you.</p>
+  
+  
+  
+  
+  <section class="section section-light wedding-story-section" id="schedule">
+    <div class="wedding-story-layout">
+      <div class="wedding-story-photo wedding-story-photo-tall">
+        <img src="assets/wedding_building_close.jpeg"
+             alt="Peter and Kelly standing together outside an elegant building">
+      </div>
+
+      <div class="wedding-story-center">
+        <div class="wedding-story-heading">Our Wedding Day</div>
+        <div class="wedding-story-date">Saturday · October 9, 2027</div>
+        <div class="wedding-story-time">4:00 PM</div>
+        <div class="wedding-story-title">Wedding Ceremony</div>
+
+        <div class="wedding-story-copy">
+          <p>Our ceremony will take place outdoors on the lakeside patio of the Chautauqua Harbor Hotel, overlooking beautiful Chautauqua Lake.</p>
+          <p>We invite you to join us inside the hotel immediately afterward for cocktail hour, dinner, and dancing.</p>
+        </div>
+
+        <aside class="wedding-story-convalidation">
+          <h3>Mass &amp; Convalidation of Our Marriage</h3>
+          <p>On <strong>Monday, October 11 at 2 PM</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. While separate from our wedding at Harbor Hotel, family and friends who wish to join us are warmly welcome.</p>
+        </aside>
+      </div>
+
+      <div class="wedding-story-side-photos">
+        <div class="wedding-story-photo wedding-story-photo-wide">
+          <img src="assets/wedding_building_wide.jpeg"
+               alt="Peter and Kelly together on the steps outside an elegant building">
+        </div>
+
+        <div class="wedding-story-photo wedding-story-photo-walking">
+          <img src="assets/wedding_walking.jpeg"
+               alt="Peter and Kelly walking together along a tree-lined path">
+        </div>
+      </div>
     </div>
-    <img class="framed-photo" src="assets/welcome_walkway.jpg" alt="Sunset walkway along Chautauqua Lake" />
   </section>
 
+
+
+
+
   <section class="quick-links">
-    <a class="quick-card" href="#engagement">
-      <div class="icon">💍</div>
-      <h3>Our Engagement</h3>
-      <p>How Peter proposed in New Orleans.</p>
-    </a>
+    
     <a class="quick-card" href="#schedule">
       <div class="icon">▦</div>
       <h3>Our Wedding Day</h3>
@@ -1297,6 +2147,11 @@ pointer-events:none;
       <h3>Guest Information</h3>
       <p>Travel, hotel, attire, directions, and more.</p>
     </a>
+    <a class="quick-card" href="#engagement">
+      <div class="icon">💍</div>
+      <h3>Our Engagement</h3>
+      <p>How Peter proposed in New Orleans.</p>
+    </a>
     <a class="quick-card" href="#rsvp">
       <div class="icon">✉</div>
       <h3>RSVP</h3>
@@ -1304,33 +2159,9 @@ pointer-events:none;
     </a>
   </section>
 
-  <section class="section section-ivory split" id="engagement">
-    <img class="framed-photo" src="assets/engagement_placeholder.jpg" alt="Placeholder photo to be replaced with engagement photo" />
-    <div class="center">
-      <h2>Our Engagement</h2>
-      <p>On <strong>April 2, 2025</strong>, during a quick, fun getaway to <strong>New Orleans</strong>, Peter asked Kelly to marry him.</p>
-      <div class="she-said-yes-wrap">
-        <div class="she-said-yes-note">she said yes!</div>
-      </div>
-    </div>
-  </section>
+  
 
-  <section class="section section-light center" id="schedule">
-    <h2>Our Wedding Day</h2>
-    
-
-    <div class="wedding-feature-card">
-      <div class="feature-kicker">Saturday · October 9, 2027</div>
-      <div class="feature-time">4:00 PM</div>
-      <div class="feature-title">Wedding Ceremony</div>
-      <div class="feature-subtitle">Our ceremony will take place outdoors on the lakeside patio of the Chautauqua Harbor Hotel, overlooking beautiful Chautauqua Lake.<br><br>We invite you to join us inside the hotel immediately afterward for cocktail hour, dinner, and dancing.</div>
-    </div>
-
-    <div class="convalidation-note">
-<h3>Mass &amp; Convalidation of Our Marriage</h3>
-<p>On <strong>Monday, October 11 at 2 PM</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. While separate from our wedding at Harbor Hotel, family and friends who wish to join us are warmly welcome.</p>
-</div>
-</section>
+  
 
 
 
@@ -1363,7 +2194,7 @@ pointer-events:none;
         <div class="guest-info-block">
           <div class="guest-info-label">Attire</div>
           <h3>Wedding Attire</h3>
-          <p>We invite our guests to dress in <strong>cocktail attire</strong>. Ties optional.</p>
+          <p>We invite our guests to dress in Cocktail attire. Ties optional.</p>
         </div>
 
         <div class="guest-info-block">
@@ -1371,6 +2202,17 @@ pointer-events:none;
           <h3>Coming Soon</h3>
           <p>Additional weekend details will be added as plans are finalized.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+<section class="section section-ivory split" id="engagement">
+    <img class="framed-photo" src="assets/engagement_placeholder.jpg" alt="Placeholder photo to be replaced with engagement photo" />
+    <div class="center">
+      <h2>Our Engagement</h2>
+      <p>On <strong>April 2, 2025</strong>, during a quick, fun getaway to <strong>New Orleans</strong>, Peter asked Kelly to marry him.</p>
+      <div class="she-said-yes-wrap">
+        <div class="she-said-yes-note">she said yes!</div>
       </div>
     </div>
   </section>
@@ -1387,20 +2229,14 @@ pointer-events:none;
 
   
   
+  
   <section class="section section-light center" id="rsvp">
     <div class="rsvp-box">
       <h2>RSVP</h2>
-      <p>Please respond by <strong>September 1, 2027</strong>.</p>
-      <p class="lede">We look forward to celebrating with you.</p>
-
-      <p style="margin:18px auto 8px; font-size:1rem; color:var(--muted); max-width:520px;">
-        <strong>Already RSVP'd?</strong><br>
-        You can return anytime to review or update your RSVP before <strong>September 1, 2027</strong>.
-      </p>
-
-      <a class="button" href="rsvp.html">Manage Your RSVP →</a>
+      <p class="lede">RSVPs will open after invitations are sent out. Please check back then to submit your response.</p>
     </div>
   </section>
+
 
 
 
