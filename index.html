@@ -2043,7 +2043,144 @@ pointer-events:none;
       }
     }
 
-  </style>
+  
+    .wedding-story-photo-hotel {
+      height: 250px;
+      width: 92%;
+      justify-self: start;
+      transform: rotate(1.5deg);
+    }
+
+    .wedding-story-photo-kiss {
+      height: 315px;
+      width: 86%;
+      justify-self: end;
+      transform: rotate(-2.5deg);
+    }
+
+    @media (max-width: 1000px) {
+      .wedding-story-photo-hotel,
+      .wedding-story-photo-kiss {
+        width: 100%;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wedding-story-photo-hotel,
+      .wedding-story-photo-kiss {
+        width: 100%;
+        height: 240px;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wedding-story-photo-hotel,
+      .wedding-story-photo-kiss {
+        height: 250px;
+      }
+    }
+
+  
+    .wedding-story-left-column,
+    .wedding-story-right-column {
+      display: grid;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .wedding-story-photo-left-hotel {
+      height: 255px;
+      width: 92%;
+      justify-self: end;
+      transform: rotate(1.5deg);
+    }
+
+    .wedding-story-layout-rebalanced {
+      align-items: start;
+    }
+
+    @media (max-width: 1000px) {
+      .wedding-story-layout-rebalanced {
+        grid-template-columns: .9fr 1.15fr;
+      }
+
+      .wedding-story-right-column {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .wedding-story-photo-left-hotel,
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking,
+      .wedding-story-photo-kiss {
+        width: 100%;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wedding-story-layout-rebalanced {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wedding-story-center {
+        order: 1;
+      }
+
+      .wedding-story-left-column {
+        order: 2;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .wedding-story-right-column {
+        order: 3;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .wedding-story-photo-tall,
+      .wedding-story-photo-left-hotel,
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking,
+      .wedding-story-photo-kiss {
+        width: 100%;
+        height: 240px;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wedding-story-left-column,
+      .wedding-story-right-column {
+        grid-template-columns: 1fr;
+      }
+
+      .wedding-story-photo-tall,
+      .wedding-story-photo-left-hotel,
+      .wedding-story-photo-wide,
+      .wedding-story-photo-walking,
+      .wedding-story-photo-kiss {
+        height: 250px;
+      }
+    }
+
+  
+.wedding-story-date{font-size:1rem !important;letter-spacing:.28em !important;font-weight:600;}
+
+
+.wedding-story-date{
+    white-space: nowrap !important;
+    display: inline-block !important;
+    font-size: .92rem !important;
+    letter-spacing: .18em !important;
+    line-height: 1.4 !important;
+}
+
+</style>
 </head>
 
 <body>
@@ -2093,11 +2230,19 @@ pointer-events:none;
   
   
   
+  
   <section class="section section-light wedding-story-section" id="schedule">
-    <div class="wedding-story-layout">
-      <div class="wedding-story-photo wedding-story-photo-tall">
-        <img src="assets/wedding_building_close.jpeg"
-             alt="Peter and Kelly standing together outside an elegant building">
+    <div class="wedding-story-layout wedding-story-layout-rebalanced">
+      <div class="wedding-story-left-column">
+        <div class="wedding-story-photo wedding-story-photo-tall">
+          <img src="assets/wedding_building_close.jpeg"
+               alt="Peter and Kelly standing together outside an elegant building">
+        </div>
+
+        <div class="wedding-story-photo wedding-story-photo-left-hotel">
+          <img src="assets/wedding_harbor_hotel.jpg"
+               alt="Chautauqua Harbor Hotel on the lake">
+        </div>
       </div>
 
       <div class="wedding-story-center">
@@ -2113,11 +2258,14 @@ pointer-events:none;
 
         <aside class="wedding-story-convalidation">
           <h3>Mass &amp; Convalidation of Our Marriage</h3>
-          <p>On <strong>Monday, October 11 at 2 PM</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. While separate from our wedding at Harbor Hotel, family and friends who wish to join us are warmly welcome.</p>
+          <p>On <strong>Monday, October 11 at 2 PM</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. </p>
         </aside>
       </div>
 
-      <div class="wedding-story-side-photos">
+      
+      
+
+      <div class="wedding-story-side-photos wedding-story-right-column">
         <div class="wedding-story-photo wedding-story-photo-wide">
           <img src="assets/wedding_building_wide.jpeg"
                alt="Peter and Kelly together on the steps outside an elegant building">
@@ -2127,9 +2275,16 @@ pointer-events:none;
           <img src="assets/wedding_walking.jpeg"
                alt="Peter and Kelly walking together along a tree-lined path">
         </div>
+
+        <div class="wedding-story-photo wedding-story-photo-kiss">
+          <img src="assets/wedding_kiss.jpeg"
+               alt="Peter kissing Kelly by the water">
+        </div>
       </div>
     </div>
   </section>
+
+
 
 
 
