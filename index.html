@@ -2180,6 +2180,113 @@ pointer-events:none;
     line-height: 1.4 !important;
 }
 
+
+/* Rebalanced Our Wedding photo collage */
+.wedding-story-layout,
+.wedding-story-layout-rebalanced{
+  grid-template-columns:minmax(230px,.9fr) minmax(390px,1.25fr) minmax(250px,.9fr) !important;
+  gap:clamp(24px,3vw,42px) !important;
+  align-items:center !important;
+}
+
+.wedding-story-left-column{
+  display:grid !important;
+  gap:24px !important;
+  align-content:center !important;
+}
+
+.wedding-story-right-column,
+.wedding-story-side-photos{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:24px !important;
+  align-content:center !important;
+}
+
+.wedding-story-photo-tall{
+  height:540px !important;
+}
+
+.wedding-story-photo-left-hotel,
+.wedding-story-photo-hotel{
+  width:94% !important;
+  height:235px !important;
+  justify-self:end !important;
+}
+
+.wedding-story-photo-wide{
+  width:100% !important;
+  height:310px !important;
+  transform:rotate(2deg) !important;
+}
+
+.wedding-story-photo-kiss{
+  width:88% !important;
+  height:330px !important;
+  justify-self:start !important;
+  transform:rotate(-2deg) !important;
+}
+
+@media(max-width:1000px){
+  .wedding-story-layout,
+  .wedding-story-layout-rebalanced{
+    grid-template-columns:1fr 1.15fr !important;
+  }
+
+  .wedding-story-right-column,
+  .wedding-story-side-photos{
+    grid-column:1 / -1 !important;
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  .wedding-story-photo-wide,
+  .wedding-story-photo-kiss{
+    width:100% !important;
+    height:280px !important;
+    transform:none !important;
+  }
+}
+
+@media(max-width:720px){
+  .wedding-story-layout,
+  .wedding-story-layout-rebalanced{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:22px !important;
+  }
+
+  .wedding-story-center{order:1 !important;}
+  .wedding-story-left-column{order:2 !important;width:100% !important;grid-template-columns:1fr 1fr !important;}
+  .wedding-story-right-column,
+  .wedding-story-side-photos{order:3 !important;width:100% !important;grid-template-columns:1fr 1fr !important;}
+
+  .wedding-story-photo-tall,
+  .wedding-story-photo-left-hotel,
+  .wedding-story-photo-hotel,
+  .wedding-story-photo-wide,
+  .wedding-story-photo-kiss{
+    width:100% !important;
+    height:240px !important;
+    transform:none !important;
+  }
+}
+
+@media(max-width:480px){
+  .wedding-story-left-column,
+  .wedding-story-right-column,
+  .wedding-story-side-photos{
+    grid-template-columns:1fr !important;
+  }
+
+  .wedding-story-photo-tall,
+  .wedding-story-photo-left-hotel,
+  .wedding-story-photo-hotel,
+  .wedding-story-photo-wide,
+  .wedding-story-photo-kiss{
+    height:250px !important;
+  }
+}
+
 </style>
 
   <meta property="og:type" content="website">
@@ -2264,9 +2371,9 @@ pointer-events:none;
 
       <div class="wedding-story-center">
         <div class="wedding-story-heading">Our Wedding Day</div>
-        <div class="wedding-story-date">Saturday · October 9, 2027</div>
-        <div class="wedding-story-time">4:00 PM</div>
-        <div class="wedding-story-title">Wedding Ceremony</div>
+        <div class="wedding-story-date"><span style="font-size:1.25em;">Saturday · October 9, 2027</span></div>
+        <div class="wedding-story-time"></div>
+        <div class="wedding-story-title"></div>
 
         <div class="wedding-story-copy">
           <p>Our ceremony will take place outdoors on the lakeside patio of the Chautauqua Harbor Hotel, overlooking beautiful Chautauqua Lake.</p>
@@ -2275,7 +2382,7 @@ pointer-events:none;
 
         <aside class="wedding-story-convalidation">
           <h3>Mass &amp; Convalidation of Our Marriage</h3>
-          <p>On <strong>Monday, October 11 at 2 PM</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. </p>
+          <p>On <strong>Monday, October 11</strong>, we will celebrate a Catholic Mass and Convalidation of our Marriage at the <strong>UB Newman Center</strong>, 495 Skinnersville Road, Buffalo, NY 14228. </p>
         </aside>
       </div>
 
@@ -2286,11 +2393,6 @@ pointer-events:none;
         <div class="wedding-story-photo wedding-story-photo-wide">
           <img src="assets/wedding_building_wide.jpeg"
                alt="Peter and Kelly together on the steps outside an elegant building">
-        </div>
-
-        <div class="wedding-story-photo wedding-story-photo-walking">
-          <img src="assets/wedding_walking.jpeg"
-               alt="Peter and Kelly walking together along a tree-lined path">
         </div>
 
         <div class="wedding-story-photo wedding-story-photo-kiss">
