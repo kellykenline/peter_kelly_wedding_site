@@ -2287,6 +2287,37 @@ pointer-events:none;
   }
 }
 
+
+/* Mobile-only fix for the Our Wedding Day date */
+@media (max-width: 700px) {
+  .wedding-story-date,
+  .wedding-date,
+  .date-line,
+  .wedding-story-center .date {
+    white-space: normal !important;
+    width: auto !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+    font-size: clamp(1.55rem, 6.5vw, 2rem) !important;
+    letter-spacing: 0.06em !important;
+    padding-left: 0.35rem !important;
+    padding-right: 0.35rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .wedding-story-center {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+}
+
 </style>
 
   <meta property="og:type" content="website">
