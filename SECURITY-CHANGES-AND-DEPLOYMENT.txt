@@ -1,0 +1,14 @@
+SECURITY UPDATE — October 2026
+
+Changes made:
+1. Server-side lookup throttling: 12 requests per household code per ten-minute bucket and 120 total requests per ten-minute bucket. Counters use Google Apps Script CacheService and a lock. Cache eviction and shared limits mean this is best-effort, not strong per-client rate limiting or a substitute for longer random household tokens. These shared limits can temporarily throttle legitimate guests during heavy use. Saving an RSVP is not lookup-rate-limited.
+2. Removed JSONP and public GET lookup. doGet returns a plain-text status only. Lookup and save still use POST with JSON bodies.
+3. Added <meta name="referrer" content="no-referrer"> to rsvp.html and rsvp-direct.html. Both pages strip the code query parameter from the address bar on load while retaining it in the form for submission. QR codes with ?code=... still work.
+
+IMPORTANT DEPLOYMENT STEPS:
+- Replace the live Apps Script source with the updated Code.gs. Save it and create a NEW web app deployment VERSION (Manage deployments > Edit > New version > Deploy), retaining the same deployment URL when possible. Merely uploading the HTML files does not apply server protections.
+- Upload rsvp.html and rsvp-direct.html to your host. You do not need to replace the existing QR codes.
+- Test a QR URL, a manual code lookup, and an RSVP save, confirming your live Google Sheet changes. Test a GET request with ?action=lookup&code=... and confirm that it does not reveal household data.
+- For strongest referrer protection configure your host to send HTTP response header Referrer-Policy: no-referrer on RSVP pages; the included meta tag also applies after HTML parsing.
+- Access still relies on relatively short household codes. This update does NOT prevent someone who knows or guesses a valid code from accessing that household's RSVP. Longer random invitation tokens remain recommended.
+- No live tests or deployment have been performed.
