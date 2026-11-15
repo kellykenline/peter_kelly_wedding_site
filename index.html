@@ -2288,52 +2288,88 @@ pointer-events:none;
 }
 
 
-/* Mobile-only fix for the Our Wedding Day date */
-@media (max-width: 700px) {
-  .wedding-story-date,
-  .wedding-date,
-  .date-line,
-  .wedding-story-center .date {
-    white-space: normal !important;
-    width: auto !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    overflow-wrap: normal !important;
-    word-break: keep-all !important;
-    text-align: center !important;
-    line-height: 1.2 !important;
-    font-size: clamp(1.55rem, 6.5vw, 2rem) !important;
-    letter-spacing: 0.06em !important;
-    padding-left: 0.35rem !important;
-    padding-right: 0.35rem !important;
-    box-sizing: border-box !important;
-  }
+/* Wedding hotel blocks */
+.hotel-block-intro{max-width:790px;margin:30px auto 24px;text-align:center;line-height:1.7;color:var(--muted)}
+.hotel-block-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;max-width:1120px;margin:0 auto 36px;text-align:left}
+.hotel-block-card{background:#fffaf3;border:1px solid rgba(176,141,87,.36);box-shadow:0 15px 36px rgba(23,31,45,.075);overflow:hidden;display:flex;flex-direction:column}
+.hotel-block-image{width:100%;height:240px;object-fit:cover;display:block}
+.hotel-block-content{padding:28px 30px 32px;display:flex;flex-direction:column;flex:1}
+.hotel-block-eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:.75rem;color:#80663c;font-weight:700;margin-bottom:12px}
+.hotel-block-content h3{font-size:1.55rem;margin:0 0 8px;color:var(--navy);line-height:1.2}
+.hotel-block-subtitle{color:var(--muted);margin:0 0 18px;line-height:1.55}
+.hotel-block-deadline{border-top:1px solid rgba(176,141,87,.25);border-bottom:1px solid rgba(176,141,87,.25);padding:15px 0;margin:0 0 17px;line-height:1.5}
+.hotel-block-deadline strong{display:block;color:var(--navy);font-size:1.07rem}
+.hotel-block-content p{line-height:1.65}
+.hotel-block-rate{margin:0 0 16px}
+.hotel-block-actions{margin-top:auto;padding-top:10px}
+.hotel-block-book{display:inline-block;background:var(--navy);color:white!important;text-decoration:none;padding:14px 24px;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;transition:background .2s}
+.hotel-block-book:hover,.hotel-block-book:focus-visible{background:#4e6476}
+.hotel-block-extra{background:#f5eee3;border-left:3px solid #b08d57;padding:15px 18px;margin:16px 0 0;font-size:.94rem;line-height:1.65}
+.hotel-block-extra strong{color:var(--navy)}
+.hotel-block-extra a{color:var(--navy);font-weight:700}
+/* Hotel cards: consistent header alignment and prominent reservation links */
+.hotel-block-header{display:flex;flex-direction:column;min-height:178px}
+.hotel-block-subtitle{margin-bottom:14px}
+.hotel-block-actions{margin:0 0 22px;padding:0}
+.hotel-block-book{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-height:48px;padding:13px 22px;border:1px solid var(--navy);border-radius:4px;box-shadow:0 5px 12px rgba(23,31,45,.12);text-align:center;letter-spacing:.08em;transition:background .2s,transform .2s,box-shadow .2s}
+.hotel-block-book::after{content:"↗";font-size:1.13em;font-weight:400;line-height:1}
+.hotel-block-book:hover,.hotel-block-book:focus-visible{transform:translateY(-2px);box-shadow:0 8px 18px rgba(23,31,45,.18)}
+@media(max-width:760px){.hotel-block-header{min-height:0}.hotel-block-actions{margin-bottom:22px}.hotel-block-book{width:100%}}
+.hotel-block-footnote{max-width:980px;margin:0 auto 24px;text-align:center;color:var(--muted);font-size:.91rem;line-height:1.6}
+@media(max-width:760px){.hotel-block-grid{grid-template-columns:1fr;gap:20px}.hotel-block-image{height:210px}.hotel-block-content{padding:24px 22px 27px}}
 
-  .wedding-story-center {
-    min-width: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
+
+    .hotel-shared-deadline{max-width:850px;margin:28px auto 36px;padding:24px 30px;text-align:center;border:1px solid rgba(176,141,87,.45);border-radius:14px;background:rgba(255,250,239,.9);box-shadow:0 8px 25px rgba(17,32,51,.055);display:flex;flex-direction:column;align-items:center;gap:8px}
+    .hotel-shared-deadline-label{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#80663c}
+    .hotel-shared-deadline strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.12;color:var(--navy);font-weight:600}
+    .hotel-shared-deadline span:last-child{color:var(--muted);line-height:1.5}
+    @media(max-width:600px){.hotel-shared-deadline{margin:22px auto 28px;padding:22px 16px}}
+
+/* Subtle distinction for the preferred wedding venue */
+.hotel-block-preferred {
+  border: 3px solid rgba(176,141,87,.78);
+  box-shadow: 0 15px 36px rgba(23,31,45,.075), 0 0 0 4px rgba(176,141,87,.10);
 }
+.hotel-block-preferred .hotel-block-eyebrow { color: #80663c; }
 
-
-/* iPhone/Chrome: refined typography for the Our Wedding Day date */
-@media (max-width: 700px) {
-  .wedding-story-date,
-  .wedding-date,
-  .date-line,
-  .wedding-story-center .date {
-    font-family: Georgia, "Times New Roman", serif !important;
-    font-style: italic !important;
-    font-weight: 700 !important;
-    font-size: clamp(1.55rem, 6.3vw, 2rem) !important;
-    letter-spacing: 0.035em !important;
-    line-height: 1.16 !important;
-  }
+/* Refined wedding hotel booking links */
+.hotel-block-actions{margin:2px 0 24px;padding:0}
+.hotel-block-book{
+  display:inline-flex;align-items:center;justify-content:space-between;
+  gap:26px;min-width:220px;min-height:52px;
+  padding:14px 18px 14px 23px;
+  background:linear-gradient(135deg,#263c50 0%,#172c40 100%);
+  color:#fff!important;border:1px solid rgba(183,152,99,.65);
+  border-radius:8px;box-shadow:0 4px 12px rgba(20,39,56,.13);
+  font-size:.8rem;font-weight:700;letter-spacing:.075em;
+  text-transform:uppercase;text-decoration:none;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
 }
+.hotel-block-book::after{
+  content:"↗";display:inline-flex;align-items:center;justify-content:center;
+  width:27px;height:27px;flex-shrink:0;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#f2e2c3;
+  font-size:1.12rem;font-weight:400;line-height:1;
+}
+.hotel-block-book:hover,.hotel-block-book:focus-visible{
+  background:linear-gradient(135deg,#344f65 0%,#243d53 100%);
+  transform:translateY(-2px);box-shadow:0 7px 17px rgba(20,39,56,.2);
+}
+.hotel-block-book:focus-visible{outline:3px solid #b08d57;outline-offset:3px}
+@media(max-width:760px){.hotel-block-book{width:100%;min-width:0}}
+@media(prefers-reduced-motion:reduce){.hotel-block-book{transition:none}}
 
+/* Option 2: modern navy/champagne hotel booking buttons */
+.hotel-block-book{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-width:245px;min-height:56px;padding:9px 10px 9px 23px;background:#182d45;color:#fff!important;border:1px solid #c9ac79;border-radius:13px;box-shadow:0 5px 14px rgba(24,45,69,.13);font-size:.88rem;font-weight:600;letter-spacing:.025em;text-transform:none;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
+.hotel-block-book::after{content:"↗";display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:#d8bf93;color:#182d45;font-size:1.3rem;font-weight:500;line-height:1}
+.hotel-block-book:hover,.hotel-block-book:focus-visible{background:#263f58;transform:translateY(-2px);box-shadow:0 8px 18px rgba(24,45,69,.2)}
+.hotel-block-book:focus-visible{outline:3px solid #c9ac79;outline-offset:3px}
+@media(max-width:760px){.hotel-block-book{width:100%;min-width:0}}
+@media(prefers-reduced-motion:reduce){.hotel-block-book{transition:none}}
+
+/* Remove decorative arrows from both hotel booking buttons. */
+.hotel-block-book::after{content:none;display:none}
+.hotel-block-book{justify-content:center;padding:14px 23px}
 </style>
 
   <meta property="og:type" content="website">
@@ -2424,7 +2460,7 @@ pointer-events:none;
 
         <div class="wedding-story-copy">
           <p>Our ceremony will take place outdoors on the lakeside patio of the Chautauqua Harbor Hotel, overlooking beautiful Chautauqua Lake.</p>
-          <p>Following the ceremony, the celebration will continue inside the hotel with cocktail hour, dinner, and dancing.</p>
+          <p>We invite you to join us inside the hotel immediately afterward for cocktail hour, dinner, and dancing.</p>
         </div>
 
         <aside class="wedding-story-convalidation">
@@ -2506,13 +2542,6 @@ pointer-events:none;
         </div>
 
         <div class="guest-info-block">
-          <div class="guest-info-label">Hotel Accommodations</div>
-          <h3>Room Block Details</h3>
-          <p>We will be reserving a block of rooms at the Chautauqua Harbor Hotel for our wedding weekend. Reservation details and the group booking code will be posted here once available.</p>
-          <p><em>Please check back after November 2026 for room block information and additional nearby lodging options.</em></p>
-        </div>
-
-        <div class="guest-info-block">
           <div class="guest-info-label">Attire</div>
           <h3>Wedding Attire</h3>
           <p>We invite our guests to dress in Cocktail attire. Ties optional.</p>
@@ -2524,6 +2553,43 @@ pointer-events:none;
           <p>Additional weekend details will be added as plans are finalized.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section section-ivory" id="hotel-blocks" aria-labelledby="hotel-blocks-title">
+    <div class="center">
+      <h2 id="hotel-blocks-title">Wedding Weekend Accommodations</h2>
+      <p class="hotel-block-intro"></p>
+    </div>
+    <div class="hotel-shared-deadline" role="note" aria-label="Hotel reservation deadline">
+      <span class="hotel-shared-deadline-label">Hotel Reservation Group Rate Expires</span>
+      <strong>September 8, 2027</strong>
+      <span>Group rates and hotel availability are not guaranteed after this date.</span>
+    </div>
+    <div class="hotel-block-grid">
+      <article class="hotel-block-card hotel-block-preferred">
+        <img class="hotel-block-image" src="assets/chautauqua_harbor_room_block.png" alt="Chautauqua Harbor Hotel overlooking Chautauqua Lake" loading="lazy" />
+        <div class="hotel-block-content">
+          <div class="hotel-block-header"><div class="hotel-block-eyebrow">Preferred Hotel · Wedding Venue</div>
+          <h3>Chautauqua <span style="display:block">Harbor Hotel</span></h3>
+          <p class="hotel-block-subtitle">10 Dunham Avenue, Celoron, NY · Celebrate and stay right where the wedding takes place.</p>
+          <div class="hotel-block-actions"><a class="hotel-block-book" href="https://reservations.travelclick.com/104282?groupID=5554008" target="_blank" rel="noopener noreferrer">Book Your Stay</a></div></div>
+          <p class="hotel-block-rate">Special wedding room rates range from <strong>$249–$325 per night</strong> for Friday and Saturday, depending on room type, plus taxes. Rooms are subject to availability.</p>
+          <div class="hotel-block-extra"><strong>Arriving early or staying longer?</strong> Thursday, October 7 and Sunday, October 10 are available at lower rates of approximately $169–$219 per night, depending on room type. To add either of those nights to your group rate reservation, please call the hotel directly at <a href="tel:+17164892800">716-489-2800</a>.</div>
+          
+        </div>
+      </article>
+      <article class="hotel-block-card">
+        <img class="hotel-block-image" src="assets/hampton_jamestown_room_block.png" alt="Exterior of Hampton Inn and Suites Jamestown" loading="lazy" />
+        <div class="hotel-block-content">
+          <div class="hotel-block-header"><div class="hotel-block-eyebrow">Nearby Hotel · About 10 Minutes Away</div>
+          <h3>Hampton Inn &amp; Suites Jamestown</h3>
+          <p class="hotel-block-subtitle">4 West Oak Hill Road, Jamestown, NY · A convenient alternative a short drive from the wedding venue.</p>
+          <div class="hotel-block-actions"><a class="hotel-block-book" href="https://www.hilton.com/en/book/reservation/rooms/?ctyhocn=JHWNKHX&amp;arrivalDate=2027-10-08&amp;departureDate=2027-10-10&amp;groupCode=KSW&amp;room1NumAdults=1&amp;fromId=HILTONLINKDIRECT&amp;cid=OH,MB,attendmyevent,MULTIPR,OfferCTA,Multipage,Book,i81912" target="_blank" rel="noopener noreferrer">Book Your Stay</a></div></div>
+          <p class="hotel-block-rate">Special wedding room rate: <strong>$110 per night</strong> for a Double Queen room or King Suite, plus taxes. Rooms are subject to availability.</p>
+          
+        </div>
+      </article>
     </div>
   </section>
 
