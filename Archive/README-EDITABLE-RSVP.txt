@@ -1,0 +1,1 @@
+Replace your Apps Script Code.gs with the included Code.gs, save, and redeploy the existing Web App. Guests can then use Find My RSVP to update an existing response by household name.

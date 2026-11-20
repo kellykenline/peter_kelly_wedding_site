@@ -1,0 +1,1 @@
+Household-code RSVP: Deploy Code.gs as a bound Google Apps Script web app, then replace PASTE_YOUR_DEPLOYED_APPS_SCRIPT_EXEC_URL_HERE in rsvp.html. QR links: https://ourlakewedding.com/rsvp.html?code=YOUR-CODE. Back up your sheet first. Test on the hosted HTTPS site, including mobile. Original homepage and photo assets are preserved.

@@ -1,0 +1,1 @@
+Version 10 cleanup: index.html was cleaned to remove duplicated schedule artifacts and rebuild the Celebration Schedule and Guest Information sections with stable markup. RSVP files and assets were preserved.
